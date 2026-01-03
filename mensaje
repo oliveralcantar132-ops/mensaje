@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un mensaje especial</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fff5f7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        button:hover {
+            background-color: #ff758f;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        /* El contenedor del corazón */
+        #heart-container {
+            position: absolute;
+            display: none; /* Se oculta al inicio */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* El corazón dibujado con CSS */
+        .heart {
+            background-color: #ff4d6d;
+            display: inline-block;
+            height: 100px;
+            margin: 0 10px;
+            position: relative;
+            top: 0;
+            transform: rotate(-45deg);
+            width: 100px;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            background-color: #ff4d6d;
+            border-radius: 50%;
+            height: 100px;
+            position: absolute;
+            width: 100px;
+        }
+
+        .heart:before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 50px;
+            top: 0;
+        }
+
+        /* Animación de crecimiento */
+        .grow {
+            display: flex !important;
+            animation: grow-animation 1.5s ease-out forwards;
+        }
+
+        @keyframes grow-animation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scale(10); /* Crece hasta cubrir gran parte de la pantalla */
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Te quiero mucho</h1>
+    
+    <button onclick="darBesito()">Besitos</button>
+
+    <div id="heart-container">
+        <div class="heart"></div>
+    </div>
+
+    <script>
+        function darBesito() {
+            const container = document.getElementById('heart-container');
+            
+            // Reiniciamos la animación por si se hace clic varias veces
+            container.classList.remove('grow');
+            void container.offsetWidth; // Truco para reiniciar el flujo de CSS
+            container.classList.add('grow');
+            
+            // Opcional: imprimir algo en consola para verificar
+            console.log("¡Besito enviado!");
+        }
+    </script>
+
+</body>
+</html>
